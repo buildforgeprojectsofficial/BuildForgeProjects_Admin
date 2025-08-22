@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Protected Drive Login</title>
+  <style>
+    /* Background Image */
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Poppins", sans-serif;
+      background: url("/assert/image/logo\ BFP.png") no-repeat center center fixed;
+      background-size: 100% 100%;
+    }
+
+    /* Overlay with gradient (to make text readable) */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4));
+      z-index: 0;
+    }
+
+    /* Login Card */
+    .login-box {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 40px;
+      width: 350px;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .login-box h2 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      letter-spacing: 1px;
+    }
+
+    /* Input Styling */
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 15px 0;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    input[type="password"]:focus {
+      box-shadow: 0 0 10px #00f2fe, 0 0 20px #4facfe;
+    }
+
+    /* Button Styling */
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(90deg, #00f2fe, #4facfe);
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 242, 254, 0.5);
+    }
+
+    /* Smooth error message */
+    .error {
+      margin-top: 10px;
+      color: #ff4b2b;
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .error.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h2>Secure Login</h2>
+    <form onsubmit="return checkPassword()">
+      <input type="password" id="pass" placeholder="Enter Password">
+      <button type="submit">Login</button>
+      <div id="error" class="error">Wrong Password! Try again.</div>
+    </form>
+  </div>
+
+  <script>
+    function checkPassword() {
+      let p = document.getElementById('pass').value;
+      let error = document.getElementById('error');
+
+      if (p === "bfp25") { // change this password
+        window.location.href="https://drive.google.com/drive/my-drive";
+        return false;
+      } else {
+        error.classList.add("show");
+        setTimeout(() => error.classList.remove("show"), 2000);
+        return false;
+      }
+    }
+  </script>
+
+</body>
+</html>
